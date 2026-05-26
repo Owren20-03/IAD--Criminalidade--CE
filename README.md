@@ -62,6 +62,6 @@ SSPDS-CE / SUPESP: https://www.sspds.ce.gov.br/estatisticas-2/
 
 Painel estático: https://www.supesp.ce.gov.br/estatistica-sspds/
 
-Período coberto: 2021–2023
+Período coberto: 2021 – 2023
 
 Tipos de crime: CVLI (Crimes Violentos Letais e Intencionais) e CVP (Crimes Violentos contra o Patrimônio)
