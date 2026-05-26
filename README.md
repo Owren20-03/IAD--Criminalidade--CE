@@ -34,6 +34,7 @@ iad-criminalidade-ce/
 Pré-requisitos
 
 **1. PostgreSQL 14+** 
+
 **2. DBeaver (recomendado) ou psql**
 
 ## Passo a passo
@@ -45,6 +46,7 @@ Crie o banco de dados:
 sql
 CREATE DATABASE criminalidade_ce;
 ```
+
 Execute os scripts SQL na ordem:
 ```
 bashpsql -d criminalidade_ce -f sql/01_criacao.sql
@@ -57,6 +59,9 @@ psql -d criminalidade_ce -f sql/04_consultas.sql
 ## Fonte dos Dados
 
 SSPDS-CE / SUPESP: https://www.sspds.ce.gov.br/estatisticas-2/
+
 Painel estático: https://www.supesp.ce.gov.br/estatistica-sspds/
-Período coberto: 2019–2024
+
+Período coberto: 2021–2023
+
 Tipos de crime: CVLI (Crimes Violentos Letais e Intencionais) e CVP (Crimes Violentos contra o Patrimônio)
