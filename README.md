@@ -3,10 +3,10 @@ Trabalho Final — Análise de Dados com SQL
 Disciplina: Introdução à Análise de Dados
 
 ## Integrantes
-° Flávio Victor
-° Henrique Gabriel
-° Kaio Victor
-° Paulo Henrique
+- Flávio Victor
+- Henrique Gabriel
+- Kaio Victor
+- Paulo Henrique
 
 ## Tema
 Análise de ocorrências criminais no estado do Ceará com base nos dados públicos da Superintendência de Pesquisa e Estratégia de Segurança Pública (SUPESP/SSPDS-CE).
@@ -33,12 +33,13 @@ iad-criminalidade-ce/
 ## Como Rodar
 Pré-requisitos
 
-PostgreSQL 14+
-DBeaver (recomendado) ou psql
+**1. PostgreSQL 14+** 
+**2. DBeaver (recomendado) ou psql**
 
 ## Passo a passo
 
 Baixe os dados seguindo as instruções em dados/INSTRUCOES_DOWNLOAD.md
+
 Crie o banco de dados:
 ```
 sql
