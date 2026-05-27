@@ -1,4 +1,4 @@
-# 📥 Como Baixar os Dados do SSPDS-CE
+# Como Baixar os Dados do SSPDS-CE
 
 ## Fonte oficial
 
