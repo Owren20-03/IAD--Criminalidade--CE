@@ -49,7 +49,8 @@ CREATE DATABASE criminalidade_ce;
 
 Execute os scripts SQL na ordem:
 ```
-bashpsql -d criminalidade_ce -f sql/01_criacao.sql
+bash
+psql -d criminalidade_ce -f sql/01_criacao.sql
 psql -d criminalidade_ce -f sql/02_importacao.sql
 psql -d criminalidade_ce -f sql/03_tratamento.sql
 psql -d criminalidade_ce -f sql/04_consultas.sql
