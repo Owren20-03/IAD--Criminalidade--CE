@@ -1,0 +1,126 @@
+Município;AIS;Meio Empregado;Data;Hora;Dia da Semana;Gênero;Idade;Escolaridade;Raça
+Caucaia;AIS Não Identificada (Caucaia);Arma de fogo;2021-01-02;21:53:00;Sábado;Masculino;16;Ensino Fundamental Completo;Preta
+Caucaia;AIS Não Identificada (Caucaia);Arma de fogo;2021-01-02;21:53:00;Sábado;Masculino;17;Ensino Médio Incompleto;Não Informada
+Itapajé;AIS 11;Arma de fogo;2021-01-03;19:30:00;Domingo;Masculino;20;Alfabetizado;Não Informada
+Caucaia;AIS 12;Arma de fogo;2021-01-04;10:59:59;Segunda;Masculino;16;Não Alfabetizado;Parda
+Caucaia;AIS 12;Arma de fogo;2021-01-04;10:59:59;Segunda;Masculino;35;Não Alfabetizado;Não Informada
+Fortaleza;AIS 16;Arma de fogo;2021-01-06;11:40:00;Quarta;Masculino;23;Alfabetizado;Parda
+Boa Viagem;AIS 04;Arma de fogo;2021-01-10;03:40:00;Domingo;Masculino;25;Ensino Fundamental Completo;Parda
+Aratuba;AIS 29;Arma de fogo;2021-01-15;01:30:00;Sexta;Masculino;16;Alfabetizado;Parda
+Caucaia;AIS 12;Arma de fogo;2021-01-15;15:29:59;Sexta;Masculino;25;Não Informada;Não Informada
+Fortaleza;AIS 22;Arma de fogo;2021-01-18;18:29:00;Segunda;Masculino;21;Alfabetizado;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-01-21;22:28:00;Quinta;Masculino;28;Ensino Fundamental Completo;Não Informada
+Maracanaú;AIS 14;Arma de fogo;2021-01-23;11:10:00;Sábado;Masculino;28;Ensino Fundamental Incompleto;Não Informada
+Russas;AIS 01;Arma de fogo;2021-01-23;21:00:00;Sábado;Masculino;20;Alfabetizado;Não Informada
+Beberibe;AIS 30;Arma de fogo;2021-01-23;22:20:00;Sábado;Masculino;27;Alfabetizado;Não Informada
+Horizonte;AIS 25;Arma de fogo;2021-01-26;00:15:00;Terça;Masculino;25;Ensino Fundamental Completo;Não Informada
+Horizonte;AIS 25;Arma de fogo;2021-01-26;00:15:00;Terça;Masculino;34;Ensino Fundamental Incompleto;Não Informada
+Cascavel;AIS 15;Arma de fogo;2021-01-26;07:00:00;Terça;Masculino;24;Ensino Médio Incompleto;Não Informada
+Fortaleza;AIS 06;Arma de fogo;2021-01-27;06:10:00;Quarta;Masculino;48;Ensino Médio Incompleto;Não Informada
+Fortaleza;AIS 22;Arma de fogo;2021-01-28;21:00:00;Quinta;Masculino;20;Não Informada;Parda
+Fortaleza;AIS 18;Arma de fogo;2021-01-29;00:10:00;Sexta;Masculino;36;Ensino Fundamental Incompleto;Não Informada
+Fortaleza;AIS 06;Arma de fogo;2021-02-03;18:00:00;Quarta;Masculino;29;Ensino Fundamental Incompleto;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-02-04;21:00:00;Quinta;Masculino;30;Não Alfabetizado;Não Informada
+Barbalha;AIS 02;Arma de fogo;2021-02-06;01:00:00;Sábado;Masculino;19;Alfabetizado;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-02-08;18:40:00;Segunda;Masculino;31;Alfabetizado;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-02-14;00:29:59;Domingo;Masculino;30;Alfabetizado;Parda
+Fortaleza;AIS 06;Arma de fogo;2021-02-14;17:15:00;Domingo;Masculino;17;Ensino Médio Incompleto;Parda
+Fortaleza;AIS 18;Arma de fogo;2021-02-18;21:00:00;Quinta;Masculino;25;Ensino Fundamental Completo;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-02-22;03:29:59;Segunda;Masculino;15;Alfabetizado;Não Informada
+Pentecoste;AIS 11;Arma de fogo;2021-02-23;16:49:59;Terça;Masculino;66;Alfabetizado;Não Informada
+Sobral;AIS 03;Arma de fogo;2021-02-24;13:59:59;Quarta;Masculino;24;Alfabetizado;Parda
+São João do Jaguaribe;AIS 01;Arma de fogo;2021-02-25;02:30:00;Quinta;Masculino;19;Não Informada;Parda
+Trairi;AIS 23;Arma de fogo;2021-02-25;15:00:00;Quinta;Masculino;26;Não Informada;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-03-03;01:00:00;Quarta;Masculino;20;Ensino Fundamental Incompleto;Branca
+Aratuba;AIS 29;Arma de fogo;2021-03-03;15:00:00;Quarta;Masculino;19;Alfabetizado;Parda
+Aratuba;AIS 29;Arma de fogo;2021-03-03;15:00:00;Quarta;Masculino;15;Ensino Fundamental Incompleto;Não Informada
+Sobral;AIS 03;Arma de fogo;2021-03-05;10:00:00;Sexta;Masculino;28;Ensino Fundamental Completo;Parda
+Chorozinho;AIS 25;Arma de fogo;2021-03-06;17:40:00;Sábado;Masculino;34;Ensino Fundamental Completo;Não Informada
+Crato;AIS 02;Arma de fogo;2021-03-07;19:20:00;Domingo;Masculino;53;Alfabetizado;Parda
+Caucaia;AIS 12;Arma de fogo;2021-03-12;13:59:59;Sexta;Masculino;18;Ensino Fundamental Incompleto;Não Informada
+Fortaleza;AIS 21;Arma de fogo;2021-03-17;03:10:00;Quarta;Masculino;20;Ensino Fundamental Incompleto;Parda
+Fortaleza;AIS 19;Arma de fogo;2021-03-20;00:29:59;Sábado;Masculino;20;Alfabetizado;Não Informada
+Antonina do Norte;AIS 33;Arma de fogo;2021-03-21;20:30:00;Domingo;Masculino;18;Alfabetizado;Não Informada
+Caucaia;AIS 26;Arma de fogo;2021-03-26;13:59:59;Sexta;Masculino;27;Ensino Médio Completo;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-04-08;19:59:59;Quinta;Masculino;16;Não Informada;Parda
+Caucaia;AIS 26;Arma de fogo;2021-04-12;09:31:00;Segunda;Masculino;Não Informada;Não Informada;Não Informada
+Fortaleza;AIS 20;Arma de fogo;2021-04-14;20:54:00;Quarta;Masculino;23;Alfabetizado;Não Informada
+Morrinhos;AIS 11;Arma de fogo;2021-04-14;22:30:00;Quarta;Masculino;25;Alfabetizado;Não Informada
+Horizonte;AIS 25;Arma de fogo;2021-04-15;12:29:59;Quinta;Masculino;31;Ensino Médio Incompleto;Não Informada
+Pereiro;AIS 31;Arma de fogo;2021-04-22;23:30:00;Quinta;Masculino;33;Alfabetizado;Não Informada
+Itapajé;AIS 11;Arma de fogo;2021-04-24;08:40:00;Sábado;Masculino;19;Alfabetizado;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-04-25;02:30:00;Domingo;Masculino;22;Ensino Fundamental Incompleto;Não Informada
+Baturité;AIS 29;Arma de fogo;2021-04-30;03:00:00;Sexta;Masculino;17;Alfabetizado;Parda
+Fortaleza;AIS 19;Arma de fogo;2021-05-06;01:40:00;Quinta;Masculino;16;Alfabetizado;Não Informada
+Caucaia;AIS 12;Arma de fogo;2021-05-09;21:29:59;Domingo;Masculino;19;Ensino Fundamental Completo;Não Informada
+Caridade;AIS 04;Arma de fogo;2021-05-13;17:30:00;Quinta;Masculino;22;Ensino Fundamental Incompleto;Não Informada
+Fortaleza;AIS 22;Arma de fogo;2021-05-14;17:19:59;Sexta;Masculino;23;Ensino Fundamental Incompleto;Preta
+Pacujá;AIS 03;Arma de fogo;2021-05-17;03:29:59;Segunda;Masculino;26;Ensino Fundamental Completo;Não Informada
+Fortaleza;AIS 22;Arma de fogo;2021-05-17;19:30:00;Segunda;Masculino;33;Ensino Fundamental Incompleto;Não Informada
+Fortaleza;AIS 06;Arma de fogo;2021-05-25;21:10:00;Terça;Masculino;26;Alfabetizado;Não Informada
+Sobral;AIS 03;Arma de fogo;2021-05-28;01:45:00;Sexta;Masculino;25;Alfabetizado;Parda
+Caridade;AIS 04;Arma de fogo;2021-05-30;00:19:59;Domingo;Masculino;25;Alfabetizado;Não Informada
+Quixeramobim;AIS 09;Arma de fogo;2021-06-08;19:20:00;Terça;Masculino;22;Ensino Fundamental Incompleto;Parda
+Quixeramobim;AIS 09;Arma de fogo;2021-06-08;19:20:00;Terça;Masculino;22;Alfabetizado;Não Informada
+Caridade;AIS 04;Arma de fogo;2021-06-09;16:30:00;Quarta;Masculino;17;Ensino Fundamental Incompleto;Não Informada
+Caucaia;AIS Não Identificada (Caucaia);Arma de fogo;2021-06-11;16:11:59;Sexta;Masculino;22;Ensino Fundamental Completo;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-06-16;15:29:59;Quarta;Masculino;16;Ensino Médio Incompleto;Não Informada
+Caucaia;AIS 12;Arma de fogo;2021-06-18;13:00:00;Sexta;Masculino;18;Ensino Médio Incompleto;Não Informada
+Maranguape;AIS 24;Arma de fogo;2021-06-18;17:30:00;Sexta;Masculino;22;Não Informada;Parda
+Farias Brito;AIS 02;Arma de fogo;2021-06-21;23:40:00;Segunda;Masculino;20;Ensino Fundamental Incompleto;Parda
+Farias Brito;AIS 02;Arma de fogo;2021-06-21;23:40:00;Segunda;Masculino;18;Ensino Fundamental Incompleto;Não Informada
+Sobral;AIS 03;Arma de fogo;2021-06-24;17:30:00;Quinta;Masculino;24;Alfabetizado;Parda
+Fortaleza;AIS 05;Arma de fogo;2021-07-04;14:30:00;Domingo;Masculino;23;Alfabetizado;Não Informada
+Juazeiro do Norte;AIS 02;Arma de fogo;2021-07-06;21:49:59;Terça;Masculino;16;Ensino Fundamental Incompleto;Não Informada
+Caridade;AIS 04;Arma de fogo;2021-07-08;14:30:00;Quinta;Masculino;22;Ensino Médio Completo;Não Informada
+Fortaleza;AIS 16;Arma de fogo;2021-07-09;16:30:00;Sexta;Masculino;21;Ensino Fundamental Incompleto;Não Informada
+Maracanaú;AIS 14;Arma de fogo;2021-07-09;20:10:00;Sexta;Masculino;20;Não Informada;Não Informada
+Araripe;AIS 33;Arma de fogo;2021-07-10;18:19:59;Sábado;Masculino;31;Alfabetizado;Parda
+Aracati;AIS 30;Arma de fogo;2021-07-13;19:59:59;Terça;Masculino;18;Ensino Fundamental Incompleto;Não Informada
+Aracati;AIS 30;Arma de fogo;2021-07-22;06:00:00;Quinta;Masculino;21;Ensino Fundamental Incompleto;Parda
+Caucaia;AIS 26;Arma de fogo;2021-07-22;06:10:00;Quinta;Masculino;25;Alfabetizado;Preta
+Fortaleza;AIS 19;Arma de fogo;2021-07-23;06:25:00;Sexta;Masculino;22;Não Informada;Não Informada
+Morada Nova;AIS 09;Arma de fogo;2021-07-23;18:00:00;Sexta;Feminino;17;Ensino Médio Incompleto;Parda
+Nova Olinda;AIS 02;Arma de fogo;2021-07-25;03:19:59;Domingo;Masculino;29;Não Informada;Parda
+Fortaleza;AIS 19;Arma de fogo;2021-07-26;22:20:00;Segunda;Masculino;31;Alfabetizado;Não Informada
+Icó;AIS 34;Arma de fogo;2021-07-27;14:19:59;Terça;Masculino;23;Não Informada;Não Informada
+Juazeiro do Norte;AIS 02;Arma de fogo;2021-08-02;21:00:00;Segunda;Masculino;30;Não Alfabetizado;Não Informada
+Fortaleza;AIS 05;Arma de fogo;2021-08-03;21:41:00;Terça;Masculino;23;Alfabetizado;Não Informada
+Banabuiú;AIS 09;Arma de fogo;2021-08-13;21:29:59;Sexta;Masculino;19;Alfabetizado;Não Informada
+Fortaleza;AIS 06;Arma de fogo;2021-08-16;21:29:59;Segunda;Masculino;23;Não Informada;Não Informada
+Fortaleza;AIS 05;Arma de fogo;2021-08-18;04:59:59;Quarta;Masculino;31;Ensino Fundamental Incompleto;Não Informada
+Varjota;AIS 07;Arma de fogo;2021-08-18;09:29:59;Quarta;Masculino;27;Não Informada;Não Informada
+Pires Ferreira;AIS 07;Arma de fogo;2021-08-21;23:25:00;Sábado;Masculino;33;Ensino Médio Completo;Parda
+Pindoretama;AIS 15;Arma de fogo;2021-09-02;10:30:00;Quinta;Masculino;35;Alfabetizado;Parda
+Itaitinga;AIS 25;Arma de fogo;2021-09-06;15:29:59;Segunda;Masculino;16;Alfabetizado;Parda
+Fortaleza;AIS 21;Arma de fogo;2021-09-07;07:14:59;Terça;Masculino;15;Não Informada;Não Informada
+Horizonte;AIS 25;Arma de fogo;2021-09-13;13:30:00;Segunda;Masculino;32;Ensino Fundamental Incompleto;Não Informada
+Horizonte;AIS 25;Arma de fogo;2021-09-20;18:02:00;Segunda;Masculino;26;Ensino Fundamental Completo;Não Informada
+Acaraú;AIS 11;Arma de fogo;2021-09-28;18:00:00;Terça;Masculino;22;Ensino Fundamental Incompleto;Não Informada
+Acaraú;AIS 11;Arma de fogo;2021-09-28;18:00:00;Terça;Masculino;19;Não Alfabetizado;Não Informada
+Fortaleza;AIS 18;Arma de fogo;2021-10-01;19:46:00;Sexta;Masculino;21;Alfabetizado;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-10-02;11:27:59;Sábado;Masculino;21;Ensino Fundamental Completo;Preta
+Fortaleza;AIS 21;Arma de fogo;2021-10-07;03:36:59;Quinta;Masculino;20;Ensino Fundamental Completo;Não Informada
+Forquilha;AIS 03;Arma de fogo;2021-10-12;14:30:00;Terça;Masculino;17;Alfabetizado;Não Informada
+Morada Nova;AIS 09;Arma de fogo;2021-10-17;12:00:00;Domingo;Masculino;17;Alfabetizado;Parda
+Quixadá;AIS 09;Arma de fogo;2021-10-24;10:59:59;Domingo;Masculino;30;Alfabetizado;Não Informada
+Itarema;AIS 11;Arma de fogo;2021-10-26;14:35:59;Terça;Masculino;26;Não Informada;Parda
+Fortaleza;AIS 06;Arma de fogo;2021-10-27;12:00:00;Quarta;Masculino;18;Não Informada;Não Informada
+Varjota;AIS 07;Arma de fogo;2021-10-29;13:59:59;Sexta;Masculino;Não Informada;Não Informada;Não Informada
+Paraipaba;AIS 23;Arma de fogo;2021-11-04;12:00:00;Quinta;Masculino;27;Alfabetizado;Não Informada
+Amontada;AIS 11;Arma de fogo;2021-11-09;13:39:59;Terça;Masculino;21;Não Informada;Não Informada
+Fortaleza;AIS 19;Arma de fogo;2021-11-17;00:04:00;Quarta;Masculino;28;Ensino Médio Completo;Não Informada
+Monsenhor Tabosa;AIS 07;Arma de fogo;2021-11-18;13:30:00;Quinta;Masculino;Não Informada;Não Informada;Não Informada
+Trairi;AIS 23;Arma de fogo;2021-11-20;07:00:00;Sábado;Masculino;18;Ensino Médio Incompleto;Não Informada
+Acaraú;AIS 11;Arma de fogo;2021-11-21;10:40:00;Domingo;Feminino;21;Ensino Fundamental Completo;Não Informada
+Santana do Acaraú;AIS 03;Arma de fogo;2021-11-21;15:18:59;Domingo;Masculino;18;Ensino Fundamental Incompleto;Não Informada
+Santana do Acaraú;AIS 03;Arma de fogo;2021-11-21;19:49:59;Domingo;Masculino;16;Não Informada;Não Informada
+Fortaleza;AIS 16;Arma de fogo;2021-11-30;16:38:00;Terça;Masculino;30;Ensino Médio Incompleto;Não Informada
+Jijoca de Jericoacoara;AIS 11;Arma de fogo;2021-12-10;22:30:00;Sexta;Masculino;22;Ensino Fundamental Completo;Parda
+Quixadá;AIS 09;Arma de fogo;2021-12-10;23:15:00;Sexta;Masculino;27;Alfabetizado;Branca
+Itatira;AIS 04;Arma de fogo;2021-12-13;12:29:59;Segunda;Masculino;0;Ensino Médio Completo;Não Informada
+Morada Nova;AIS 09;Arma de fogo;2021-12-15;19:30:10;Quarta;Masculino;18;Não Informada;Branca
+Caridade;AIS 04;Arma de fogo;2021-12-18;16:34:59;Sábado;Masculino;28;Não Alfabetizado;Preta
+Horizonte;AIS 25;Arma de fogo;2021-12-18;16:59:59;Sábado;Masculino;27;Ensino Fundamental Incompleto;Não Informada
+Cascavel;AIS 15;Arma de fogo;2021-12-25;03:40:00;Sábado;Masculino;25;Alfabetizado;Não Informada
+Monsenhor Tabosa;AIS 07;Arma de fogo;2021-12-30;17:30:00;Quinta;Masculino;24;Alfabetizado;Parda
