@@ -1,6 +1,5 @@
 """
 graficos_estaticos.py
-Gráficos estáticos para o relatório — Criminalidade no Ceará
 Gera imagens PNG prontas para inserir no relatório ou apresentação
 
 Como rodar:
