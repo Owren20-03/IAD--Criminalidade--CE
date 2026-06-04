@@ -3,7 +3,7 @@
 **Disciplina:** Introdução à Análise de Dados  
 **Tema:** Criminalidade no Ceará — SSPDS-CE  
 **Data de entrega:** 04 de junho de 2026  
-**Integrantes:** Flávio Victor, Kaio Vitor, Henrique Gabriel, Paulo Henrique
+**Integrantes:** Flávio, Paulo Henrique, Kaio Vitor, Henrique Gabriel
 
 ---
 
@@ -11,9 +11,9 @@
 
 O Ceará é um dos estados brasileiros que mais investe em transparência de dados de segurança pública, disponibilizando informações detalhadas por município, tipo de crime, perfil de vítima e período. Isso torna o estado um laboratório valioso para análise de dados reais com impacto social.
 
-Nosso grupo escolheu esse tema por dois motivos principais: primeiro, porque os dados são públicos, detalhados e bem documentados; segundo, porque entender padrões de criminalidade é essencial para qualquer debate informado sobre políticas de segurança.
+Nosso grupo escolheu esse tema por dois motivos principais: primeiro, porque os dados são públicos, detalhados e bem documentados; segundo, porque entender padrões de criminalidade é essencial para qualquer debate informado sobre políticas de segurança pública.
 
-Queríamos responder perguntas como: *Onde os crimes acontecem mais? Quem são as vítimas? A situação está melhorando ou piorando? Existe sazonalidade?*
+Queríamos responder perguntas como: *Onde os crimes acontecem mais? Quem são as vítimas? A situação está melhorando ou piorando ao longo dos anos? Existe sazonalidade nos crimes?*
 
 ---
 
@@ -24,184 +24,304 @@ Queríamos responder perguntas como: *Onde os crimes acontecem mais? Quem são a
 | **Órgão** | SUPESP — Superintendência de Pesquisa e Estratégia de Segurança Pública |
 | **Portal** | https://www.sspds.ce.gov.br/estatisticas-2/ |
 | **Período** | 2021 a 2023 |
-| **Formato** | Planilhas `.xlsx` convertidas para `.csv` |
+| **Formato original** | Planilhas `.xlsx` e `.csv` convertidas para `.csv` separado por ano |
 
-### Principais colunas utilizadas
+### Conjuntos de dados utilizados
+
+| Tabela | Descrição | Total de registros |
+|--------|-----------|-------------------|
+| `cvli` | Crimes Violentos Letais e Intencionais | 9.239 |
+| `cvp` | Crimes Violentos contra o Patrimônio | 136.678 |
+| `intervencao_policial` | Mortes por intervenção policial | 424 |
+
+### Principais colunas
 
 | Coluna | Descrição |
 |--------|-----------|
-| `ano` / `mes` | Período da ocorrência |
-| `municipio` | Município onde ocorreu |
-| `tipo_crime` | Tipo do crime (ex: Homicídio doloso) |
-| `quantidade` | Número de ocorrências |
-| `sexo_vitima` | Sexo da vítima |
-| `faixa_etaria` | Faixa etária da vítima |
-| `raca_cor` | Raça/Cor da vítima |
+| `municipio` | Município onde ocorreu o crime |
 | `ais` | Área Integrada de Segurança |
+| `natureza` | Tipo do crime (ex: Homicídio Doloso, Feminicídio) |
+| `data` / `hora` | Data e hora da ocorrência |
+| `dia_semana` | Dia da semana |
+| `meio_empregado` | Arma ou meio utilizado |
+| `genero` | Gênero da vítima |
+| `idade_vitima` | Idade da vítima |
+| `escolaridade_vitima` | Escolaridade da vítima |
+| `raca_vitima` | Raça/Cor da vítima |
 
 ### Limitações encontradas
 
-- Algumas colunas como `sexo_vitima` e `raca_cor` têm alto índice de "Não informado", o que limita a análise de perfil de vítimas.
-- O nome dos municípios não é padronizado entre diferentes arquivos (espaços extras, grafias alternativas).
-- Os arquivos de CVP têm menos colunas detalhadas do que os de CVLI.
+- A coluna `raca_vitima` apresentou alto índice de "Não Informada" (64,3% dos casos), o que limita análises de vitimização racial com precisão absoluta.
+- O CVP não possui colunas de perfil de vítima (apenas localização e data), impossibilitando análises demográficas para crimes patrimoniais.
+- A tabela `Unidade_Prisional` do arquivo original continha apenas 4 registros e foi descartada por ser insuficiente para análise.
 
 ---
 
 ## 3. Decisões de Modelagem
 
-Optamos por criar **duas tabelas separadas** para CVLI e CVP porque:
-- Os tipos de crime são distintos e têm colunas diferentes (CVLI tem perfil de vítima, CVP não tem detalhamento por sexo/raça).
-- Isso facilita consultas específicas por tipo e evita colunas com muitos NULLs.
-- Podemos fazer JOINs entre elas quando necessário (pergunta 6).
+Optamos por criar **três tabelas separadas**:
 
-Também criamos **índices** nas colunas mais usadas nas consultas (ano, municipio, tipo_crime) para melhorar a performance.
+- **`cvli`** — crimes letais, com perfil detalhado de vítima
+- **`cvp`** — crimes patrimoniais, com dados de localização e período
+- **`intervencao_policial`** — mortes por ação policial, para comparação com CVLIs
+
+Essa separação foi escolhida porque os três conjuntos têm estruturas de colunas diferentes e dinâmicas distintas de análise. Juntar tudo em uma tabela geraria muitas colunas nulas.
+
+As colunas `ano` e `mes` foram geradas automaticamente a partir da coluna `data` usando colunas computadas (`GENERATED ALWAYS AS`), evitando redundância e garantindo consistência.
+
+Índices foram criados nas colunas `municipio`, `natureza`, `data`, `genero` e `raca_vitima` para acelerar as consultas analíticas.
 
 ---
 
 ## 4. Tratamento dos Dados
 
-### Problemas encontrados e soluções
-
-| Problema | Como resolvemos |
-|----------|-----------------|
-| Espaços extras nos textos | `TRIM()` em todas as colunas de texto |
-| Sexo com grafias diferentes ("M", "MASC", "masculino") | `CASE` com `UPPER()` para padronizar |
-| Valores NULL em `faixa_etaria` e `raca_cor` | Substituídos por `'Não informado'` |
-| Linhas sem município ou tipo_crime | Removidas com `DELETE` |
-| Quantidades negativas | Removidas com `DELETE` |
+| Problema encontrado | Como foi resolvido |
+|--------------------|-------------------|
+| Espaços extras no início/fim dos textos | `TRIM()` em todas as colunas de texto |
+| Gênero com grafias inconsistentes ("M", "MASC", "Masculino") | Padronização com `CASE` + `UPPER()` |
+| Valores `NULL` em `faixa_etaria`, `raca_vitima`, `escolaridade` | Substituídos por `'Não Informada'` |
+| Valores `NULL` em `ais` | Substituídos por `'Não Identificada'` |
+| Linhas sem município | Removidas com `DELETE` |
+| Erro no script: `DELETE FROM cvli WHERE municipio OR TRIM...` | Corrigido para `WHERE municipio IS NULL OR TRIM(municipio) = ''` |
 
 ---
 
 ## 5. Perguntas Respondidas
 
-### Pergunta 1 — Top 10 municípios com mais CVLIs em 2023
+### Pergunta 1 — Quais os 10 municípios com mais CVLIs no período?
 
 ```sql
-SELECT municipio, SUM(quantidade) AS total_cvli
-FROM ocorrencias_cvli
-WHERE ano = 2023
+SELECT municipio, COUNT(*) AS total_cvli
+FROM cvli
 GROUP BY municipio
 ORDER BY total_cvli DESC
 LIMIT 10;
 ```
 
-**Interpretação:** Fortaleza lidera com ampla vantagem por concentrar mais de 40% da população do estado. Entre os municípios do interior, aqueles na Região Metropolitana e no Cariri aparecem com frequência, refletindo o impacto do crime organizado fora da capital.
+| # | Município | Total CVLI |
+|---|-----------|-----------|
+| 1 | Fortaleza | 2.488 |
+| 2 | Caucaia | 691 |
+| 3 | Maracanaú | 410 |
+| 4 | Sobral | 245 |
+| 5 | Juazeiro do Norte | 222 |
+| 6 | Aquiraz | 182 |
+| 7 | Cascavel | 168 |
+| 8 | Maranguape | 155 |
+| 9 | Pacatuba | 142 |
+| 10 | Horizonte | 137 |
+
+**Interpretação:** Fortaleza lidera com 2.488 casos — mais de 3 vezes o segundo colocado (Caucaia, 691). Os municípios do Top 10 são predominantemente da Região Metropolitana de Fortaleza, o que indica que a violência letal está fortemente concentrada no entorno da capital. Municípios como Sobral e Juazeiro do Norte, polos do interior, também aparecem, refletindo sua importância regional e possível influência do crime organizado fora da RMF.
 
 ---
 
-### Pergunta 2 — Evolução anual dos CVLIs (tendência temporal)
+### Pergunta 2 — Como evoluiu o número de CVLIs e CVPs por ano?
 
 ```sql
-SELECT ano, SUM(quantidade) AS total_cvli
-FROM ocorrencias_cvli
-GROUP BY ano
-ORDER BY ano;
+SELECT ano, COUNT(*) AS total_cvli FROM cvli GROUP BY ano ORDER BY ano;
+SELECT ano, COUNT(*) AS total_cvp  FROM cvp  GROUP BY ano ORDER BY ano;
 ```
 
-**Interpretação:** Os dados revelam [descrever o que foi encontrado]. Uma tendência de queda indica efeito positivo de programas como o Pacto por um Ceará Pacífico; picos em determinados anos podem coincidir com disputas territoriais entre facções criminosas.
+**CVLI por ano:**
+
+| Ano | Total |
+|-----|-------|
+| 2021 | 3.299 |
+| 2022 | 2.970 |
+| 2023 | 2.970 |
+
+**CVP por ano:**
+
+| Ano | Total |
+|-----|-------|
+| 2021 | 48.141 |
+| 2022 | 45.930 |
+| 2023 | 42.607 |
+
+**Interpretação:** Ambos os indicadores mostram uma tendência de **queda consistente** ao longo do período. Os CVLIs reduziram 10% entre 2021 e 2023, enquanto os CVPs caíram aproximadamente 11,5%. Essa redução simultânea em crimes letais e patrimoniais sugere um efeito positivo das políticas de segurança pública implementadas no estado, como o Pacto por um Ceará Pacífico. Vale destacar que 2022 e 2023 apresentaram exatamente o mesmo número de CVLIs (2.970), indicando uma estabilização após a queda inicial.
 
 ---
 
-### Pergunta 3 — Tipo de crime mais frequente por ano
+### Pergunta 3 — Qual o tipo de crime mais frequente por ano?
 
 ```sql
-SELECT ano, tipo_crime, SUM(quantidade) AS total
-FROM ocorrencias_cvli
-GROUP BY ano, tipo_crime
+SELECT ano, natureza, COUNT(*) AS total
+FROM cvli
+GROUP BY ano, natureza
 ORDER BY ano, total DESC;
 ```
 
-**Interpretação:** O homicídio doloso representa consistentemente a maior parcela dos CVLIs. A evolução de tipos como latrocínio e lesão corporal seguida de morte merece atenção separada por terem dinâmicas diferentes.
+| Ano | Natureza | Total |
+|-----|----------|-------|
+| 2021 | Homicídio Doloso | 3.202 |
+| 2021 | Roubo Seguido de Morte (Latrocínio) | 43 |
+| 2021 | Feminicídio | 31 |
+| 2021 | Lesão Corporal Seguida de Morte | 23 |
+| 2022 | Homicídio Doloso | 2.881 |
+| 2022 | Roubo Seguido de Morte (Latrocínio) | 44 |
+| 2022 | Feminicídio | 29 |
+| 2022 | Lesão Corporal Seguida de Morte | 16 |
+| 2023 | Homicídio Doloso | 2.893 |
+| 2023 | Feminicídio | 42 |
+| 2023 | Roubo Seguido de Morte (Latrocínio) | 24 |
+| 2023 | Lesão Corporal Seguida de Morte | 11 |
+
+**Interpretação:** O Homicídio Doloso domina absolutamente os CVLIs nos três anos, representando mais de 97% dos casos. Um dado preocupante é o aumento do **Feminicídio** em 2023 (42 casos), superando o Latrocínio e chegando ao maior valor do período — um alerta para a necessidade de políticas específicas de proteção à mulher. O Latrocínio e a Lesão Corporal Seguida de Morte apresentaram queda, o que é positivo.
 
 ---
 
-### Pergunta 4 — Perfil das vítimas por sexo e raça/cor
+### Pergunta 4 — Qual o perfil das vítimas de CVLI por gênero e raça?
 
 ```sql
-SELECT sexo_vitima, raca_cor,
-       SUM(quantidade) AS total,
-       ROUND(100.0 * SUM(quantidade) / SUM(SUM(quantidade)) OVER (), 1) AS percentual
-FROM ocorrencias_cvli
-GROUP BY sexo_vitima, raca_cor
+SELECT genero, raca_vitima,
+       COUNT(*) AS total,
+       ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (), 1) AS percentual
+FROM cvli
+GROUP BY genero, raca_vitima
 ORDER BY total DESC;
 ```
 
-**Interpretação:** A grande maioria das vítimas são homens negros — um padrão consistente com as estatísticas nacionais de violência. Esse dado reforça a necessidade de políticas específicas de proteção a esse grupo, que é desproporcionalmente impactado pela violência letal.
+| Gênero | Raça/Cor | Total | % |
+|--------|----------|-------|---|
+| Masculino | Não Informada | 5.937 | 64,3% |
+| Masculino | Parda | 1.986 | 21,5% |
+| Feminino | Não Informada | 629 | 6,8% |
+| Masculino | Branca | 303 | 3,3% |
+| Feminino | Parda | 199 | 2,2% |
+| Masculino | Preta | 120 | 1,3% |
+| Feminino | Branca | 38 | 0,4% |
+| Feminino | Preta | 12 | 0,1% |
+| Masculino | Indígena | 7 | 0,1% |
+| Masculino | Amarela | 6 | 0,1% |
+| Feminino | Indígena | 2 | 0,0% |
+
+**Interpretação:** As vítimas são esmagadoramente do **sexo masculino** (cerca de 91% dos casos). O alto índice de raça "Não Informada" (71,1% do total) limita a análise racial, mas entre os casos informados, pessoas **pardas e pretas** representam a maioria das vítimas — padrão consistente com as estatísticas nacionais de violência. Esse dado reforça a urgência de políticas de segurança com recorte racial. As mulheres representam cerca de 9% das vítimas de CVLI, mas merecem atenção especial pelo crescimento do feminicídio observado na Pergunta 3.
 
 ---
 
-### Pergunta 5 — Sazonalidade: em quais meses há mais crimes?
+### Pergunta 5 — Em quais meses ocorrem mais crimes? (sazonalidade)
 
 ```sql
-SELECT mes, nome_mes, SUM(quantidade) AS total_cvli
-FROM ocorrencias_cvli
-GROUP BY mes, nome_mes
-ORDER BY mes;
+SELECT mes, TO_CHAR(TO_DATE(mes::TEXT, 'MM'), 'TMMonth') AS nome_mes,
+       COUNT(*) AS total_cvli
+FROM cvli GROUP BY mes ORDER BY mes;
 ```
 
-**Interpretação:** [Descrever os picos observados]. Meses de verão e festas tendem a ter variações. Saber o pico sazonal ajuda a planejar o efetivo policial ao longo do ano.
+**CVLI — sazonalidade mensal:**
+
+| Mês | Total CVLI | Mês | Total CVP |
+|-----|-----------|-----|----------|
+| Janeiro | 809 | Janeiro | 12.654 |
+| Fevereiro | 777 | Fevereiro | 11.523 |
+| Março | 703 | Março | 11.160 |
+| Abril | 736 | Abril | 10.952 |
+| Maio | 742 | Maio | 11.659 |
+| Junho | 700 | Junho | 10.850 |
+| Julho | 762 | Julho | 11.517 |
+| Agosto | 786 | Agosto | 11.784 |
+| Setembro | 791 | Setembro | 11.187 |
+| Outubro | 840 | Outubro | 11.423 |
+| Novembro | 807 | Novembro | 11.103 |
+| Dezembro | 786 | Dezembro | 10.866 |
+
+**Interpretação:** Os CVLIs têm **outubro como mês de pico** (840 casos) e **junho como mínimo** (700). Curiosamente, o padrão é relativamente estável ao longo do ano, sem pico tão pronunciado quanto se esperaria no verão. Já os CVPs têm **janeiro como mês mais crítico** (12.654 casos), possivelmente associado ao período de férias com mais pessoas nas ruas e maior movimentação de valores. O segundo semestre concentra levemente mais crimes patrimoniais que o primeiro.
 
 ---
 
-### Pergunta 6 — Municípios com mais crimes contra a vida E contra o patrimônio
+### Pergunta 6 — Quais municípios concentram mais CVPs e como se comparam com CVLIs?
 
 ```sql
-SELECT cvli.municipio,
-       SUM(cvli.quantidade) AS total_cvli,
-       SUM(cvp.quantidade)  AS total_cvp,
-       SUM(cvli.quantidade) + SUM(cvp.quantidade) AS total_geral
-FROM ocorrencias_cvli cvli
-JOIN ocorrencias_cvp cvp
-  ON LOWER(cvli.municipio) = LOWER(cvp.municipio)
- AND cvli.ano = cvp.ano
-GROUP BY cvli.municipio
-ORDER BY total_geral DESC
+SELECT cvp.municipio,
+       COUNT(DISTINCT cvp.id) AS total_cvp,
+       COUNT(DISTINCT cvli.id) AS total_cvli
+FROM cvp
+LEFT JOIN cvli ON LOWER(TRIM(cvp.municipio)) = LOWER(TRIM(cvli.municipio))
+              AND cvp.ano = cvli.ano
+GROUP BY cvp.municipio
+ORDER BY total_cvp DESC
 LIMIT 15;
 ```
 
-**Interpretação:** Municípios no topo desta lista concentram múltiplos tipos de violência e devem ser tratados como prioridade em qualquer plano de segurança pública estadual.
+| # | Município | CVP | CVLI |
+|---|-----------|-----|------|
+| 1 | Fortaleza | 92.312 | 2.488 |
+| 2 | Caucaia | 7.277 | 691 |
+| 3 | Maracanaú | 5.148 | 410 |
+| 4 | Sobral | 3.999 | 245 |
+| 5 | Juazeiro do Norte | 3.812 | 222 |
+| 6 | Pacajus | 1.986 | 112 |
+| 7 | Horizonte | 1.859 | 137 |
+| 8 | Aquiraz | 1.189 | 182 |
+| 9 | Maranguape | 1.014 | 155 |
+| 10 | Eusébio | 1.003 | 58 |
+| 11 | Crato | 960 | 120 |
+| 12 | Cascavel | 894 | 168 |
+| 13 | Itaitinga | 723 | 79 |
+| 14 | Pacatuba | 640 | 142 |
+| 15 | Tianguá | 528 | 103 |
+
+**Interpretação:** Fortaleza é absolutamente dominante nos dois indicadores, com 92.312 CVPs — mais de 12 vezes o segundo colocado (Caucaia, 7.277). A concentração de CVP e CVLI nos mesmos municípios da Região Metropolitana confirma que essas cidades enfrentam um desafio amplo de segurança pública, não restrito a um único tipo de crime. Municípios como Eusébio e Pacajus se destacam por ter CVP relativamente alto em relação ao seu CVLI, indicando perfil mais patrimonial que violento.
 
 ---
 
-### Pergunta 7 — Variação percentual de CVLIs entre 2022 e 2023
+### Pergunta 7 — Qual o meio mais usado nos CVLIs e qual a proporção de mortes por intervenção policial?
 
 ```sql
-WITH por_ano AS (
-    SELECT municipio,
-           SUM(quantidade) FILTER (WHERE ano = 2022) AS total_2022,
-           SUM(quantidade) FILTER (WHERE ano = 2023) AS total_2023
-    FROM ocorrencias_cvli
-    WHERE ano IN (2022, 2023)
-    GROUP BY municipio
-)
-SELECT municipio, total_2022, total_2023,
-       ROUND(100.0 * (total_2023 - total_2022) / NULLIF(total_2022, 0), 1) AS variacao_percentual
-FROM por_ano
-ORDER BY variacao_percentual ASC;
+SELECT ano, meio_empregado, COUNT(*) AS total
+FROM cvli GROUP BY ano, meio_empregado ORDER BY ano, total DESC;
 ```
 
-**Interpretação:** Esta análise diferencia municípios que evoluíram positivamente daqueles que pioraram. Casos de grande redução percentual são exemplos a serem estudados para replicar boas práticas.
+| Ano | Meio Empregado | Total |
+|-----|---------------|-------|
+| 2021 | Arma de fogo | 2.842 |
+| 2021 | Arma branca | 269 |
+| 2021 | Outros meios | 188 |
+| 2022 | Arma de fogo | 2.518 |
+| 2022 | Arma branca | 284 |
+| 2022 | Outros meios | 168 |
+| 2023 | Arma de fogo | 2.553 |
+| 2023 | Arma branca | 245 |
+| 2023 | Outros meios | 172 |
+
+**Interpretação:** A **arma de fogo** é o meio dominante em todos os anos, responsável por mais de 86% dos CVLIs. Houve uma queda de 2021 para 2022 (-324 casos com arma de fogo), mas uma leve recuperação em 2023 (+35). Isso reforça a necessidade de políticas de controle de armas de fogo como estratégia central de redução da violência letal. A arma branca e outros meios mantêm participação relativamente estável e pequena.
 
 ---
 
 ## 6. Visualizações
 
-> *(Adicione aqui capturas de tela do seu dashboard no Looker Studio ou Power BI)*
+> *<img width="1844" height="506" alt="image" src="https://github.com/user-attachments/assets/68563506-db95-4100-b09b-dee4cbda2815" />
+<img width="888" height="618" alt="image" src="https://github.com/user-attachments/assets/88eecb96-e66c-493c-a2e7-9b489039e994" />
+<img width="895" height="625" alt="image" src="https://github.com/user-attachments/assets/58db1110-4562-44ae-9d57-c10ab780da16" />
+<img width="897" height="640" alt="image" src="https://github.com/user-attachments/assets/b5b81f8d-f3b7-41b6-bc6e-4d36fabdbe7c" />
+<img width="877" height="599" alt="image" src="https://github.com/user-attachments/assets/09f0766d-261e-4f82-8d2d-3793daca77a8" />
+<img width="900" height="629" alt="image" src="https://github.com/user-attachments/assets/25c3b91c-b606-44dc-b49e-c66471ad0e3b" />
+<img width="869" height="592" alt="image" src="https://github.com/user-attachments/assets/aa6f2c2b-a3dc-40ae-92d9-7a5b5d8d3aae" />
+*
 
-Sugestões de gráficos para o dashboard:
+O dashboard foi desenvolvido em Python com as bibliotecas **Plotly** e **Dash**, rodando localmente em `http://localhost:8050`. Os seguintes gráficos foram produzidos:
 
-- **Mapa coroplético** do Ceará colorido por número de CVLIs por município
-- **Gráfico de linha** com evolução anual total de CVLIs e CVPs
-- **Gráfico de barras** com top 10 municípios
-- **Gráfico de pizza** com perfil de vítimas por sexo e raça/cor
-- **Gráfico de calor** (heatmap) com mês × ano para visualizar sazonalidade
+- **KPIs no topo:** totais de CVLI, CVP e Intervenção Policial com filtro por ano
+- **Gráfico de barras agrupadas:** evolução anual de CVLI e CVP lado a lado
+- **Gráfico de barras:** tipos de natureza dos CVLIs
+- **Gráfico de barras horizontal:** Top 10 municípios com mais CVLIs
+- **Gráfico de linhas:** sazonalidade mensal de CVLI e CVP
+- **Gráfico de pizza:** perfil das vítimas por gênero
+- **Gráfico de barras:** perfil das vítimas por raça/cor
+
+Adicionalmente, gráficos estáticos em PNG foram gerados com **Matplotlib** e **Seaborn** para inserção neste relatório.
 
 ---
 
 ## 7. Conclusão
 
-A análise dos dados do SSPDS-CE revelou que a violência no Ceará é concentrada geograficamente, com Fortaleza e alguns municípios estratégicos respondendo pela maior parte das ocorrências. O perfil de vítimas é majoritariamente masculino e negro, o que aponta para urgência de políticas de proteção específicas.
+A análise dos dados do SSPDS-CE revelou padrões claros e relevantes sobre a criminalidade no Ceará entre 2021 e 2023.
 
-A evolução temporal mostra [descrever tendência geral encontrada], o que [confirma/contradiz] a efetividade das políticas de segurança pública do período analisado.
+**Positivo:** ambos os indicadores — CVLI e CVP — apresentaram **tendência de queda** no período, com reduções de 10% e 11,5% respectivamente, sugerindo avanços nas políticas de segurança pública do estado.
 
-Este trabalho demonstrou como dados públicos, combinados com SQL e visualização, podem transformar números brutos em insights acionáveis para gestores, pesquisadores e a sociedade civil.
+**Preocupante:** o **Feminicídio aumentou em 2023** (42 casos), atingindo o maior valor do triênio e superando o Latrocínio pela primeira vez. Isso exige atenção específica de políticas de proteção à mulher.
+
+**Estrutural:** a violência no Ceará é fortemente **concentrada geograficamente** — a Região Metropolitana de Fortaleza, e especialmente a capital, responde pela maior parte das ocorrências nos dois tipos de crime. O perfil das vítimas de crimes letais é predominantemente **masculino**, e entre os casos com raça informada, **pardos e pretos** são a maioria absoluta.
+
+**Metodológico:** a arma de fogo é o instrumento em mais de 86% dos CVLIs, dado que orienta diretamente qualquer política de desarmamento ou controle de armas no estado.
+
+Este trabalho demonstrou como dados públicos, tratados com SQL e visualizados com Python, podem transformar números brutos em insights acionáveis para gestores, pesquisadores e a sociedade civil.
