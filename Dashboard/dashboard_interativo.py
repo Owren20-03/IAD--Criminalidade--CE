@@ -189,12 +189,29 @@ def atualizar(anos_sel):
                           plot_bgcolor=CORES["card"], paper_bgcolor=CORES["card"],
                           font_color=CORES["texto"], legend_bgcolor=CORES["card"])
 
-    # Gênero
-    gen = c.groupby("genero").size().reset_index(name="total")
-    fig_gen = px.pie(gen, names="genero", values="total", title="Vítimas por Gênero",
-                     color_discrete_sequence=px.colors.qualitative.Set2, hole=0.4)
-    fig_gen.update_layout(plot_bgcolor=CORES["card"], paper_bgcolor=CORES["card"],
-                          font_color=CORES["texto"], legend_bgcolor=CORES["card"])
+    # Gênero — barras horizontais com percentual
+    gen = c.groupby("genero").size().reset_index(name="total").sort_values("total", ascending=True)
+    gen["percentual"] = (100 * gen["total"] / gen["total"].sum()).round(1)
+    gen["label"] = gen["percentual"].astype(str) + "%"
+    fig_gen = go.Figure(go.Bar(
+        x=gen["total"],
+        y=gen["genero"],
+        orientation="h",
+        text=gen["label"],
+        textposition="outside",
+        marker_color=[CORES["azul"] if g == "Masculino" else CORES["amarelo"]
+                      if g == "Não Informado" else CORES["vermelho"]
+                      for g in gen["genero"]],
+    ))
+    fig_gen.update_layout(
+        title="Vítimas de CVLI por Gênero",
+        plot_bgcolor=CORES["card"], paper_bgcolor=CORES["card"],
+        font_color=CORES["texto"],
+        xaxis_title="Número de casos",
+        yaxis_title="",
+        showlegend=False,
+        margin=dict(r=60)
+    )
 
     # Raça
     raca = c.groupby("raca_vitima").size().reset_index(name="total").sort_values("total", ascending=False).head(6)
