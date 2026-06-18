@@ -1,0 +1,10 @@
+pandas>=2.0
+numpy>=1.24
+openpyxl>=3.1
+duckdb>=1.0
+plotly>=5.18
+dash>=2.14
+dash-bootstrap-components>=1.5
+kaleido>=0.2
+markdown>=3.5
+xhtml2pdf>=0.2.13
