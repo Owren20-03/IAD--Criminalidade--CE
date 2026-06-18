@@ -148,12 +148,8 @@ DELETE FROM cvli WHERE municipio IS NULL OR TRIM(municipio) = '';
 | Estrutura do repositório | ✅ Concluído |
 | Download e separação dos dados | ✅ Concluído |
 | Criação das tabelas (`01_criacao.sql`) | ✅ Concluído |
-| Importação dos dados (`02_importacao.sql`) | ✅ Em andamento |
-| Tratamento dos dados (`03_tratamento.sql`) | 🔄 Em andamento |
-| Consultas analíticas (`04_consultas.sql`) | ⏳ Pendente |
+| Importação dos dados (`02_importacao.sql`) | ✅ Concluído |
+| Tratamento dos dados (`03_tratamento.sql`) | ✅ Concluído |
+| Consultas analíticas (`04_consultas.sql`) | ✅ Concluído |
 | Dashboard (Looker Studio / Power BI) | ⏳ Pendente |
-| Relatório final | ⏳ Pendente |
-
----
-
-*Documento gerado automaticamente com base no histórico da conversa.*
+| Relatório final | ✅ Concluído |
