@@ -64,12 +64,6 @@ iad-criminalidade-ce/
 - Abra e execute `sql/03_tratamento.sql`
 - Abra e execute `sql/04_consultas.sql`
 
-**5. Rode o dashboard:**
-```bash
-pip install psycopg2-binary pandas plotly dash matplotlib seaborn
-python dashboard/dashboard_interativo.py
-```
-Acesse em: http://localhost:8050
 
 ## 🗂️ Fonte dos Dados
 
