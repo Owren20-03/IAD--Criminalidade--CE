@@ -1,3 +1,7 @@
+## Link do Drive contendo os arquivos necessários para rodar o DashBoard
+
+https://drive.google.com/drive/folders/18ifn6DIk56UqrrDbM9LHNrYjzOyR0fUj?usp=sharing
+
 ## Como rodar
 
 ### 1. Instalar dependências
